@@ -18,7 +18,6 @@ Member variables are prefixed with `m_` and static variables with `s_`.
 docs - Documentation files.
 ui - User interface files.
 inc/gui - Header files for user interface components.
-inc/core - Header files for core functionality.
 src/gui - Source code files for user interface components.
 src/core - Source code files for core functionality.
 build - Build files.
