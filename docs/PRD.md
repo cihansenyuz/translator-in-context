@@ -79,7 +79,6 @@ A desktop application that allows users to translate text while considering spec
 - Custom context definition
 - Translation history management
 - Context templates
-- Multi-language support for UI
 
 ## Success Criteria
 1. Successful local execution of Mixtral LLM

@@ -28,9 +28,26 @@ git clone https://github.com/yourusername/translator-in-context.git
 cd translator-in-context
 ```
 
-2. Install required packages:
+2. Create and activate a virtual environment:
+```bash
+python -m venv .venv
+source .venv/bin/activate
+```
+
+3. Install required packages:
 ```bash
 pip install -r requirements.txt
+```
+
+## Development
+Always make sure to activate the virtual environment before running the project:
+```bash
+source .venv/bin/activate
+```
+
+To deactivate when you're done:
+```bash
+deactivate
 ```
 
 ## Usage
