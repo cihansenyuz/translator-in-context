@@ -30,7 +30,8 @@ cd translator-in-context
 
 2. Create and activate a virtual environment:
 ```bash
-python -m venv .venv
+sudo apt install python3.12-venv
+python3 -m venv .venv
 source .venv/bin/activate
 ```
 
