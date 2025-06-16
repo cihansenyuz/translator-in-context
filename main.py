@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 
-from src.core import Translator
-#from src.core import ContextManager
+from src.core import Translator, ContextManager
 #from src.core import FileHandler
 import argparse
 import sys
@@ -10,7 +9,7 @@ def main():
     parser = argparse.ArgumentParser(description='Translate text with context using local LLM')
     parser.add_argument('--text', '-t', type=str, help='Text to translate')
     parser.add_argument('--context', '-c', type=str, nargs='+', 
-                       choices=['formal', 'informal', 'technical', 'casual'],
+                       choices=['technical', 'casual'],
                        help='Context for translation')
     parser.add_argument('--output', '-o', type=str, help='Output file path')
     parser.add_argument('--clipboard', action='store_true', 
@@ -19,7 +18,7 @@ def main():
     args = parser.parse_args()
 
     # Initialize components
-    #context_manager = ContextManager()
+    context_manager = ContextManager()
     translator = Translator()
     #file_handler = FileHandler()
 
@@ -47,7 +46,7 @@ def main():
 
     try:
         # Apply context and get translation
-        context_prompt = "casual" #context_manager.getContextPrompt(context)
+        context_prompt = context_manager.getContextPrompt(context)
         translation = translator.translate(text, context_prompt)
 
         # Handle output

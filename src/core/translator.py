@@ -20,7 +20,8 @@ class Translator:
         # Construct the prompt
         prompt = f"""Context: {context_prompt}
         
-Please translate the following text keeping the provided context in mind:
+Translate the following text to English keeping the provided context in mind.
+Do not add any additional information, explanations and comment.:
 
 {text}
 
