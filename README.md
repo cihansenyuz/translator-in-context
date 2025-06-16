@@ -28,22 +28,44 @@ git clone https://github.com/yourusername/translator-in-context.git
 cd translator-in-context
 ```
 
-2. Create and activate a virtual environment:
+2. Create and activate virtual environment:
 ```bash
 sudo apt install python3.12-venv
 python3 -m venv .venv
 source .venv/bin/activate
 ```
 
-3. Install required packages:
+3. Install required packages in the virtual environment:
 ```bash
 pip install -r requirements.txt
+```
+
+4. Install Ollama:
+```bash
+curl -fsSL https://ollama.com/install.sh | sh
+```
+Then restart the terminal. Activate again virtual environment.
+
+Download the model and test it:
+```bash
+ollama pull mistral
+ollama run mistral
+```
+
+Use it in Python:
+```bash
+pip install ollama
 ```
 
 ## Development
 Always make sure to activate the virtual environment before running the project:
 ```bash
 source .venv/bin/activate
+```
+
+Ensure that the Ollama backend is running:
+```bash
+ollama serve
 ```
 
 To deactivate when you're done:

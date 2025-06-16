@@ -10,7 +10,7 @@ A desktop application that allows users to translate text while considering spec
 ### Technology Stack
 - Programming Language: Python
 - GUI Framework: PyQt6
-- LLM: Mixtral
+- LLM: Mistral
 - LLM Runtime: Ollama
 - Development Pattern: Desktop Application
 
