@@ -11,13 +11,13 @@ A desktop application that allows users to translate text while considering spec
 ## Technology Stack
 - Programming Language: Python
 - GUI Framework: PyQt6
-- LLM: Mistral
+- LLM: Gemma
 - LLM Runtime: Ollama
 - Development Pattern: Desktop Application
 
 ## Prerequisites
 - Python 3.x
-- Ollama installed with Mistral model
+- Ollama installed with Gemma model
 - PyQt6 (for GUI version)
 
 ## Installation
@@ -48,8 +48,8 @@ Then restart the terminal. Activate again virtual environment.
 
 Download the model and test it:
 ```bash
-ollama pull mistral
-ollama run mistral
+ollama pull gemma
+ollama run gemma
 ```
 
 Use it in Python:
@@ -81,20 +81,15 @@ deactivate
 python main.py --text "Text to translate"
 
 # Translation with specific context
-python main.py --text "Text to translate" --context formal technical
-
-# Use text from clipboard
-python main.py --clipboard --context informal
+python main.py --text "Text to translate" --context chinese-partners
 
 # Save translation to file
 python main.py --text "Text to translate" --context formal --output translation.txt
 ```
 
 ### Available Context Options
-- formal: Business/official communication style
-- informal: Casual language style
-- technical: Professional/technical terminology
-- casual: Conversational and friendly tone
+- european-partners: formal and suitable for communication with European
+- chinese-partners: clear and culturally appropriate
 
 ## Project Structure
 ```

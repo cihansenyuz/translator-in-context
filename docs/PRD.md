@@ -1,16 +1,16 @@
 # Product Requirements Document: Translator-in-Context
 
 ## Project Overview
-A desktop application that allows users to translate text while considering specific context, powered by the Mixtral LLM running locally through Ollama.
+A desktop application that allows users to translate text while considering specific context, powered by the Gemma LLM running locally through Ollama.
 
 ### Primary Goal
-- Learn and implement local LLM execution using Mixtral and Ollama
+- Learn and implement local LLM execution using Gemma and Ollama
 - Create a context-aware translation tool
 
 ### Technology Stack
 - Programming Language: Python
 - GUI Framework: PyQt6
-- LLM: Mistral
+- LLM: Gemma
 - LLM Runtime: Ollama
 - Development Pattern: Desktop Application
 
@@ -66,7 +66,7 @@ A desktop application that allows users to translate text while considering spec
 
 ### System Requirements
 - Operating System: Linux (initial target)
-- RAM: Sufficient for running Mixtral LLM
+- RAM: Sufficient for running Gemma LLM
 - Storage: Space for LLM model and application
 
 ### Performance Requirements
@@ -81,8 +81,8 @@ A desktop application that allows users to translate text while considering spec
 - Context templates
 
 ## Success Criteria
-1. Successful local execution of Mixtral LLM
-2. Accurate context-aware translations
-3. Functional CLI interface (Phase 1)
-4. User-friendly GUI interface (Phase 2)
-5. Stable performance on target platform
+1. [X] Successful local execution of Gemma LLM
+2. [-] Accurate context-aware translations
+3. [-] Functional CLI interface (Phase 1)
+4. [-] User-friendly GUI interface (Phase 2)
+5. [-] Stable performance on target platform

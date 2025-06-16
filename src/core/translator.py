@@ -3,7 +3,7 @@ import ollama
 
 class Translator:
     def __init__(self):
-        self.m_model = "mistral"
+        self.m_model = "gemma"
         self.m_ollama = ollama
 
     def translate(self, text: str, context_prompt: str) -> str:

@@ -10,6 +10,7 @@ class ContextManager:
         - Do not use software terms heavily, be simple and clear for non-technical person.
         - Two capital letters in the text indicates the mainboard project name. In Turkish, they are also reffered as şasi/şase"
         - Alpha, Beta, Charlie, Delta and Echo are the cabinet names.
+        - In Turkish, USB refers to "USB bellek" or "USB flash bellek", not just "USB".
         -"""
 
     def getContextPrompt(self, contexts: List[str]) -> str:
