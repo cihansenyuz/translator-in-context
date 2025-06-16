@@ -9,7 +9,7 @@ def main():
     parser = argparse.ArgumentParser(description='Translate text with context using local LLM')
     parser.add_argument('--text', '-t', type=str, help='Text to translate')
     parser.add_argument('--context', '-c', type=str, nargs='+', 
-                       choices=['technical', 'casual'],
+                       choices=['european-partners', 'chinese-partners'],
                        help='Context for translation')
     parser.add_argument('--output', '-o', type=str, help='Output file path')
     parser.add_argument('--clipboard', action='store_true', 
@@ -40,7 +40,7 @@ def main():
     # Process context
     if not args.context:
         print("No context provided. Using default context.")
-        context = ['casual']
+        context = ['european-partners']
     else:
         context = args.context
 
