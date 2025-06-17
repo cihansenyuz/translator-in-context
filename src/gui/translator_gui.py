@@ -2,8 +2,12 @@ from PyQt6.QtWidgets import QApplication, QWidget, QVBoxLayout, QLabel, QTextEdi
 from PyQt6.QtCore import Qt
 from src.core import Translator, ContextManager, FileHandler
 import sys
+import threading
+from PyQt6.QtCore import pyqtSignal
 
 class TranslatorGUI(QWidget):
+    translation_ready = pyqtSignal(str)
+
     def __init__(self):
         super().__init__()
         self.setWindowTitle("Translator in Context")
@@ -12,6 +16,7 @@ class TranslatorGUI(QWidget):
         self.m_context_manager = ContextManager()
         self.m_file_handler = FileHandler()
         self.initUI()
+        self.translation_ready.connect(self.output_text.setPlainText)
 
     def initUI(self):
         layout = QVBoxLayout()
@@ -49,8 +54,8 @@ class TranslatorGUI(QWidget):
     def onTranslate(self):
         text = self.input_text.toPlainText().strip()
         context_map = {
-            "Avrupa Ortakları": "european-partners",
-            "Çinli Ortaklar": "chinese-partners"
+            "İngilizce Bülten": "european-partners",
+            "Outsource Yazışma": "chinese-partners"
         }
         context = [context_map[self.context_combo.currentText()]]
         if not text:
@@ -58,10 +63,16 @@ class TranslatorGUI(QWidget):
             return
         try:
             context_prompt = self.m_context_manager.getContextPrompt(context)
-            translation = self.m_translator.translate(text, context_prompt)
-            self.output_text.setPlainText(translation)
+            threading.Thread(target=self.doTranslate, args=(text, context_prompt), daemon=True).start()
         except Exception as e:
             QMessageBox.critical(self, "Çeviri Hatası", str(e))
+
+    def doTranslate(self, text, context_prompt):
+        try:
+            translation = self.m_translator.translate(text, context_prompt)
+            self.translation_ready.emit(translation)
+        except Exception as e:
+            self.translation_ready.emit(f"Çeviri Hatası: {e}")
 
     def onSave(self):
         translation = self.output_text.toPlainText().strip()
