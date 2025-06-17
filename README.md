@@ -103,13 +103,11 @@ translator-in-context/
 ├── docs/           # Documentation files
 ├── src/
 │   ├── core/      # Core functionality
-│   └── gui/       # GUI components (Phase 2)
+│   └── gui/       # GUI components
 ├── main.py        # CLI entry point
 └── requirements.txt
 ```
 
 ## Future Features
-- GUI interface with PyQt6
 - Custom context definition
 - Translation history management
-- Context templates
