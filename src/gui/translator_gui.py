@@ -26,7 +26,7 @@ class TranslatorGUI(QWidget):
         layout.addWidget(self.context_label)
 
         self.context_combo = QComboBox()
-        self.context_combo.addItems(["Avrupa Ortakları", "Çinli Ortaklar"])
+        self.context_combo.addItems(["İngilizce Bülten", "Outsource Yazışma"])
         layout.addWidget(self.context_combo)
 
         self.translate_button = QPushButton("Çevir")
