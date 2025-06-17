@@ -11,8 +11,9 @@ class ContextManager:
         - The translation should be culturally appropriate for Chinese partners.
         - Do not add any additional explanations and comment"""
         }
-        self.default_context = """- Two capital letters in the text indicates the mainboard project name. In Turkish, they are also reffered as şasi/şase"
+        self.default_context = """- Two capital letters in the text indicates the mainboard project name."
         - Alpha, Beta, Charlie, Delta and Echo are the cabinet names.
+        - In Turkish, the mainboard is also reffered as şasi or şase.
         - In Turkish, USB refers to "USB bellek" or "USB flash bellek", not just "USB".
         - "servisler" or "servis" may mean "technical service personal".
         - "cell", "OC" refers to an opencell component of the panel of the television.
