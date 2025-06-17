@@ -82,7 +82,7 @@ A desktop application that allows users to translate text while considering spec
 
 ## Success Criteria
 1. [X] Successful local execution of Gemma LLM
-2. [-] Accurate context-aware translations
-3. [-] Functional CLI interface (Phase 1)
+2. [X] Accurate context-aware translations
+3. [X] Functional CLI interface (Phase 1)
 4. [-] User-friendly GUI interface (Phase 2)
 5. [-] Stable performance on target platform
