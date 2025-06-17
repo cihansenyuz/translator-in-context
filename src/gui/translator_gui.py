@@ -1,9 +1,10 @@
-from PyQt6.QtWidgets import QApplication, QWidget, QVBoxLayout, QLabel, QTextEdit, QPushButton, QComboBox, QFileDialog, QMessageBox
-from PyQt6.QtCore import Qt
+from PyQt6.QtWidgets import (QApplication, QWidget, QVBoxLayout, QLabel, QTextEdit, 
+                            QPushButton, QComboBox, QFileDialog, QMessageBox)
+from PyQt6.QtCore import Qt, pyqtSignal
 from src.core import Translator, ContextManager, FileHandler
+from src.gui.progress_dialog import TranslateProgressDialog
 import sys
 import threading
-from PyQt6.QtCore import pyqtSignal
 
 class TranslatorGUI(QWidget):
     translation_ready = pyqtSignal(str)
@@ -15,8 +16,9 @@ class TranslatorGUI(QWidget):
         self.m_translator = Translator()
         self.m_context_manager = ContextManager()
         self.m_file_handler = FileHandler()
+        self.progress_dialog = None
+        self.translation_ready.connect(self.onTranslationComplete)
         self.initUI()
-        self.translation_ready.connect(self.output_text.setPlainText)
 
     def initUI(self):
         layout = QVBoxLayout()
@@ -63,9 +65,18 @@ class TranslatorGUI(QWidget):
             return
         try:
             context_prompt = self.m_context_manager.getContextPrompt(context)
+            self.progress_dialog = TranslateProgressDialog(self)
+            self.progress_dialog.show()
             threading.Thread(target=self.doTranslate, args=(text, context_prompt), daemon=True).start()
         except Exception as e:
+            if self.progress_dialog:
+                self.progress_dialog.close()
             QMessageBox.critical(self, "Çeviri Hatası", str(e))
+
+    def onTranslationComplete(self, translation):
+        if self.progress_dialog:
+            self.progress_dialog.close()
+        self.output_text.setPlainText(translation)
 
     def doTranslate(self, text, context_prompt):
         try:
