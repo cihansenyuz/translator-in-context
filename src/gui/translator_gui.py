@@ -1,23 +1,25 @@
 from PyQt6.QtWidgets import (QApplication, QWidget, QVBoxLayout, QLabel, QTextEdit, 
-                            QPushButton, QComboBox, QFileDialog, QMessageBox)
-from PyQt6.QtCore import Qt, pyqtSignal
-from src.core import Translator, ContextManager, FileHandler
+                            QPushButton, QComboBox, QMessageBox)
+from PyQt6.QtCore import Qt
 from src.gui.progress_dialog import TranslateProgressDialog
+from src.gui.translation_service import TranslationService
+from src.gui.file_operations import FileOperations
 import sys
-import threading
 
 class TranslatorGUI(QWidget):
-    translation_ready = pyqtSignal(str)
-
     def __init__(self):
         super().__init__()
         self.setWindowTitle("Translator in Context")
         self.setMinimumWidth(500)
-        self.m_translator = Translator()
-        self.m_context_manager = ContextManager()
-        self.m_file_handler = FileHandler()
+        
+        # Initialize services
+        self.translation_service = TranslationService()
+        self.file_operations = FileOperations()
         self.progress_dialog = None
-        self.translation_ready.connect(self.onTranslationComplete)
+        
+        # Connect signals
+        self.translation_service.translation_ready.connect(self.onTranslationComplete)
+        
         self.initUI()
 
     def initUI(self):
@@ -55,48 +57,28 @@ class TranslatorGUI(QWidget):
 
     def onTranslate(self):
         text = self.input_text.toPlainText().strip()
-        context_map = {
-            "İngilizce Bülten": "european-partners",
-            "Outsource Yazışma": "chinese-partners"
-        }
-        context = [context_map[self.context_combo.currentText()]]
         if not text:
             QMessageBox.warning(self, "Girdi Gerekli", "Lütfen çevrilecek metni girin.")
             return
-        try:
-            context_prompt = self.m_context_manager.getContextPrompt(context)
-            self.progress_dialog = TranslateProgressDialog(self)
-            self.progress_dialog.show()
-            threading.Thread(target=self.doTranslate, args=(text, context_prompt), daemon=True).start()
-        except Exception as e:
-            if self.progress_dialog:
-                self.progress_dialog.close()
-            QMessageBox.critical(self, "Çeviri Hatası", str(e))
+
+        self.progress_dialog = TranslateProgressDialog(self)
+        self.progress_dialog.show()
+        
+        self.translation_service.translate_with_context(
+            text,
+            self.context_combo.currentText()
+        )
 
     def onTranslationComplete(self, translation):
         if self.progress_dialog:
             self.progress_dialog.close()
         self.output_text.setPlainText(translation)
 
-    def doTranslate(self, text, context_prompt):
-        try:
-            translation = self.m_translator.translate(text, context_prompt)
-            self.translation_ready.emit(translation)
-        except Exception as e:
-            self.translation_ready.emit(f"Çeviri Hatası: {e}")
-
     def onSave(self):
-        translation = self.output_text.toPlainText().strip()
-        if not translation:
-            QMessageBox.warning(self, "Çeviri Yok", "Kaydedilecek bir çeviri yok.")
-            return
-        file_path, _ = QFileDialog.getSaveFileName(self, "Çeviriyi Kaydet", "ceviri.txt", "Metin Dosyaları (*.txt)")
-        if file_path:
-            try:
-                self.m_file_handler.saveTranslation(translation, file_path)
-                QMessageBox.information(self, "Kaydedildi", f"Çeviri {file_path} dosyasına kaydedildi.")
-            except Exception as e:
-                QMessageBox.critical(self, "Kaydetme Hatası", str(e))
+        self.file_operations.save_translation(
+            self,
+            self.output_text.toPlainText()
+        )
 
 def run_gui():
     app = QApplication(sys.argv)
