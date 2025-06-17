@@ -78,13 +78,19 @@ deactivate
 ### CLI Mode
 ```bash
 # Basic translation with default context
-python main.py --text "Text to translate"
+python main.py -t "Text to translate"
 
 # Translation with specific context
-python main.py --text "Text to translate" --context chinese-partners
+python main.py -t "Text to translate" -c chinese-partners
 
 # Save translation to file
-python main.py --text "Text to translate" --context formal --output translation.txt
+python main.py -t "Text to translate" -c european-partners -o translation.txt
+```
+
+### GUI Modu
+GUI arayüzünü başlatmak için:
+```bash
+python -m src.gui
 ```
 
 ### Available Context Options
