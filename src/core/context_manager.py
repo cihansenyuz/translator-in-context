@@ -8,7 +8,8 @@ class ContextManager:
         - The translation should be formal and suitable for communication with European Balkan partners.""",
             'chinese-partners': """This is a translation task of an email about television software project.
         - Use software terms properly even if it is not used in the text, be clear for technical person.
-        - The translation should be culturally appropriate for Chinese partners."""
+        - The translation should be culturally appropriate for Chinese partners.
+        - Do not add any additional explanations and comment"""
         }
         self.default_context = """- Two capital letters in the text indicates the mainboard project name. In Turkish, they are also reffered as şasi/şase"
         - Alpha, Beta, Charlie, Delta and Echo are the cabinet names.
