@@ -22,9 +22,7 @@ class Translator:
         
 Translate the following text to English keeping the provided context in mind:
 
-{text}
-
-Translation:"""
+{text}"""
 
         try:
             response = self.m_ollama.generate(model=self.m_model, prompt=prompt)
