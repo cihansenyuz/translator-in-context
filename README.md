@@ -1,7 +1,7 @@
 # Translator-in-Context
 
 ## Project Overview
-A desktop application that allows users to translate text while considering specific context, powered by the Mixtral LLM running locally through Ollama.
+A desktop application that allows users to translate text while considering specific context, powered by the Gemma LLM running locally through Ollama.
 
 ### Primary Goals
 - Context-aware translation using local LLM execution

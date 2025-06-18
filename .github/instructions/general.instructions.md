@@ -3,7 +3,7 @@
 ## Project Overview
 The programming language is Python.
 GUI framework is PyQt6.
-Uses Mixtral Open-Source LLM.
+Uses Gemma Open-Source LLM.
 Uses Ollama to run the LLM.
 
 ## Project context
